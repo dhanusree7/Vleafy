@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Booking - Home</title>
+  <style>
+    :root {
+      --primary-bg: #f5f0e6;   /* Beige */
+      --secondary-bg: #e3d5ca; /* Light Brown */
+      --text-color: #3e2723;   /* Dark Brown */
+      --card-bg: #fff8f0;      /* Cream White */
+      --button-bg: #5f664d;    /* Olive Green */
+      --button-hover: #2d3721; /* Darker Olive */
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+    }
+
+    /* Navbar */
+    header {
+      background: var(--secondary-bg);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--text-color);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--button-bg);
+    }
+
+    /* Cards Layout */
+    .container {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 per row */
+      gap: 20px;
+    }
+
+    /* Mobile view - 1 per row */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        flex-direction: column; /* Stack text and image on small screens */
+      }
+      .card img {
+        max-width: 100%;
+        height: 200px;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: row; /* text left, image right */
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 50%;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* center align vertically */
+    }
+
+    .card-content h3 {
+      margin-top: 0;
+      font-size: 20px;
+      color: var(--text-color);
+    }
+
+    .card-content p {
+      margin: 8px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: var(--button-bg);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+      width: fit-content;
+    }
+
+    .btn:hover {
+      background: var(--button-hover);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>StayEase</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <h3>Normal Room</h3>
+        <p>Capacity: 2 Persons</p>
+        <p>Budget-friendly & cozy stay.</p>
+        <a href="search.html" class="btn">Choose</a>
+      </div>
+      <img src="images/room1.avif" alt="Normal Room">
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h3>Standard Room</h3>
+        <p>Capacity: 3 Persons</p>
+        <p>Comfort with extra space.</p>
+        <a href="search.html" class="btn">Choose</a>
+      </div>
+      <img src="images/room2.avif" alt="Standard Room">
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h3>Deluxe Room</h3>
+        <p>Capacity: 4 Persons</p>
+        <p>Luxury interiors & services.</p>
+        <a href="search.html" class="btn">Choose</a>
+      </div>
+      <img src="images/room3.avif" alt="Deluxe Room">
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h3>Suite</h3>
+        <p>Capacity: 6 Persons</p>
+        <p>Premium stay with top amenities.</p>
+        <a href="search.html" class="btn">Choose</a>
+      </div>
+      <img src="images/room4.jpg" alt="Suite">
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h3>Villa</h3>
+        <p>Capacity: 8 Persons</p>
+        <p>Private villa with pool & garden.</p>
+        <a href="search.html" class="btn">Choose</a>
+      </div>
+      <img src="images/room5.jpeg" alt="Villa">
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h3>Penthouse</h3>
+        <p>Capacity: 10 Persons</p>
+        <p>Top floor luxury with city view.</p>
+        <a href="search.html" class="btn">Choose</a>
+      </div>
+      <img src="images/room6.jpeg" alt="Penthouse">
+    </div>
+  </div>
+  <script>
+    const loggedInUser = localStorage.getItem("loggedInUser");
+if (!loggedInUser) {
+  window.location.href = "index.html";
+}
+
+  </script>
+</body>
+</html>

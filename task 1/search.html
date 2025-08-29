@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Room</title>
+  <style>
+    :root {
+      --primary-bg: #f5f0e6;   /* Beige */
+      --secondary-bg: #e3d5ca; /* Light Brown */
+      --text-color: #3e2723;   /* Dark Brown */
+      --card-bg: #fff8f0;      /* Cream White */
+      --button-bg: #5f664d;    /* Olive Green */
+      --button-hover: #2d3721; /* Darker Olive */
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+    }
+
+    /* Navbar */
+    header {
+      background: var(--secondary-bg);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--text-color);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--button-bg);
+    }
+
+    .booking-container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .booking-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .booking-form label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    .booking-form input, .booking-form select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .booking-form .price-display {
+      font-size: 18px;
+      margin: 15px 0;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .booking-form button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: var(--button-bg);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .booking-form button:hover {
+      background: var(--button-hover);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .booking-container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>StayEase</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="index.html">Logout</a>
+    </nav>
+  </header>
+
+  <div class="booking-container">
+    <h2>Book Your Room</h2>
+    <form class="booking-form" id="bookingForm">
+      <label for="location">Select Location:</label>
+      <select id="location" required>
+        <option value="" disabled selected>Choose location</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Mumbai">Mumbai</option>
+      </select>
+
+      <label for="roomType">Room Type:</label>
+      <input type="text" id="roomType" readonly>
+
+      <label for="numRooms">Number of Rooms:</label>
+      <input type="number" id="numRooms" min="1" value="1" required>
+
+      <label for="checkin">Check-in Date:</label>
+      <input type="date" id="checkin" required>
+
+      <label for="checkout">Check-out Date:</label>
+      <input type="date" id="checkout" required>
+
+      <div class="price-display">Total Price: ₹<span id="totalPrice">0</span></div>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+  <!-- Add this div inside body, above the script -->
+<div id="bookingAnimation" style="
+    display:none;
+    position:fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.6);
+    color:white;
+    font-size:30px;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    flex-direction:column;
+">
+  <div style="background:var(--button-bg); padding:30px 50px; border-radius:12px; text-align:center; animation: pop 0.5s ease-in-out;">
+    Booking Confirmed!
+  </div>
+</div>
+
+<style>
+@keyframes pop {
+  0% {transform: scale(0.5); opacity:0;}
+  50% {transform: scale(1.2); opacity:1;}
+  100% {transform: scale(1); opacity:1;}
+}
+</style>
+
+
+<script>
+// Room prices
+const roomPrices = {
+  "Normal Room": 2000,
+  "Standard Room": 3000,
+  "Deluxe Room": 4000,
+  "Suite": 5000,
+  "Villa": 7000,
+  "Penthouse": 10000
+};
+
+// Inputs
+const roomTypeSelect = document.getElementById("roomType");
+const numRoomsInput = document.getElementById("numRooms");
+const checkinInput = document.getElementById("checkin");
+const checkoutInput = document.getElementById("checkout");
+const totalPriceSpan = document.getElementById("totalPrice");
+
+// Calculate price
+function calculatePrice() {
+  const room = roomTypeSelect.value;
+  const numRooms = parseInt(numRoomsInput.value) || 1;
+  const checkin = new Date(checkinInput.value);
+  const checkout = new Date(checkoutInput.value);
+  let nights = 1;
+  if (checkinInput.value && checkoutInput.value) {
+    nights = Math.max(1, Math.ceil((checkout - checkin)/(1000*60*60*24)));
+  }
+  const total = (roomPrices[room] || 0) * numRooms * nights;
+  totalPriceSpan.textContent = total;
+}
+
+numRoomsInput.addEventListener("input", calculatePrice);
+checkinInput.addEventListener("change", calculatePrice);
+checkoutInput.addEventListener("change", calculatePrice);
+roomTypeSelect.addEventListener("change", calculatePrice);
+
+// Booking form
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const booking = {
+    room: roomTypeSelect.value,
+    location: document.getElementById("location").value,
+    numRooms: numRoomsInput.value,
+    checkin: checkinInput.value,
+    checkout: checkoutInput.value,
+    price: totalPriceSpan.textContent,
+    bookedOn: new Date().toLocaleString()
+  };
+
+  // Store in localStorage (append)
+  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+  bookings.push(booking);
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+
+  // Optional animation
+  const anim = document.getElementById("bookingAnimation");
+  if(anim) anim.style.display = "flex";
+
+  // Redirect to profile after 2 sec
+  setTimeout(() => window.location.href = "profile.html", 2000);
+});
+
+calculatePrice();
+</script>
+
+
+</body>
+</html>

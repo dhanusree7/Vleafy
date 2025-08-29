@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resort Booking - Login</title>
+  <style>
+    /* 🎨 Global Theme Palette */
+    :root {
+      --background: #faf9f6;    /* Beige / Ivory */
+      --primary-text: #5d4037;  /* Dark Brown */
+      --header-bg: #6d4c41;     /* Medium Brown */
+      --button-bg: #5f664d;     /* Olive Green */
+      --button-hover: #2d3721;  /* Darker Olive */
+      --accent: #d4af37;        /* Soft Gold */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--background);
+      color: var(--primary-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      width: 350px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      color: var(--header-bg);
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--primary-text);
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--button-hover);
+      transform: scale(1.03);
+    }
+
+    .extra-links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .extra-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+  <h2>Login to Book</h2>
+  <form onsubmit="return validateLogin(event)">
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <div class="extra-links">
+    <p><a href="#">Forgot Password?</a></p>
+    <p>Don’t have an account? <a href="register.html">Sign Up</a></p>
+  </div>
+</div>
+
+  <script>
+  function validateLogin(event) {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // get users from localStorage
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // find matching user
+    let user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+      // store logged in user
+      localStorage.setItem("loggedInUser", username);
+      alert("Login successful!");
+      window.location.href = "home.html";
+    } else {
+      alert("Invalid username or password");
+    }
+  }
+</script>
+
+
+</body>
+</html>
