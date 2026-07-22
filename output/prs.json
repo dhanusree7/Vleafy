@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Update README",
+        "number": 1,
+        "url": "https://github.com/dhanusree7/Vleafy/pull/1",
+        "state": "MERGED",
+        "createdAt": "2026-07-22T16:29:11Z",
+        "mergedAt": "2026-07-22T16:33:27Z",
+        "closedAt": "2026-07-22T16:33:27Z",
+        "additions": 2,
+        "deletions": 0,
+        "changedFiles": 1,
+        "repository": {
+            "name": "Vleafy",
+            "owner": "dhanusree7/Vleafy",
+            "url": "https://github.com/dhanusree7/Vleafy",
+            "stars": 0,
+            "forks": 0,
+            "language": "HTML",
+            "topics": []
+        }
+    }
+]

@@ -1,24 +1,30 @@
-# Vleafy Resort Booking
+#  My Open Source Contributions
 
-Simple hotel/resort booking system using HTML, CSS, and JavaScript. Book a room and see your bookings in the profile page. Data is stored in the browser.
+> Automatically updated with GitHub Actions.
 
-## How to Use
+## Stats
 
-1. Open `index.html` in a browser.
-2. Fill booking details on `search.html` and click **Book**.
-3. View all bookings on `profile.html`. You can also delete bookings.
+| Metric | Value |
+|---|---:|
+| Merged PRs | **1** |
+| Repositories | **1** |
+| Total Additions | **2** |
+| Total Deletions | **0** |
 
-## Features
+## ✍️(◔◡◔) Top Repositories
 
-- Room selection and pricing
-- Check-in/check-out dates
-- Booking history
-- Delete bookings
-- Simple animation on booking
+| Repository | PRs |
+|---|---:|
+| dhanusree7/Vleafy | 1 |
 
-## Tech
+## (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Recently Merged
 
-- HTML, CSS, JavaScript
-- LocalStorage for storing data
+- **dhanusree7/Vleafy** [#1](https://github.com/dhanusree7/Vleafy/pull/1) — Update README
 
-updated
+# (〃￣︶￣)人(￣︶￣〃) All Contributions
+
+## dhanusree7/Vleafy
+
+⭐ 0 stars • HTML
+
+-  [#1](https://github.com/dhanusree7/Vleafy/pull/1) — Update README
