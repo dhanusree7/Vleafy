@@ -20,3 +20,5 @@ Simple hotel/resort booking system using HTML, CSS, and JavaScript. Book a room 
 
 - HTML, CSS, JavaScript
 - LocalStorage for storing data
+
+updated
